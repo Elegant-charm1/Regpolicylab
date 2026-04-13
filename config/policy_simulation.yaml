@@ -1,0 +1,311 @@
+agent_traits:
+  role_social_traits:
+    accountant:
+      stubbornness: 0.55
+      activity_level: 0.55
+      susceptibility: 0.45
+      expression_threshold: 0.18
+      repost_tendency: 0.2
+    auditor:
+      stubbornness: 0.65
+      activity_level: 0.5
+      susceptibility: 0.35
+      expression_threshold: 0.2
+      repost_tendency: 0.15
+    manager:
+      stubbornness: 0.45
+      activity_level: 0.6
+      susceptibility: 0.5
+      expression_threshold: 0.16
+      repost_tendency: 0.25
+    regulator:
+      stubbornness: 0.75
+      activity_level: 0.45
+      susceptibility: 0.25
+      expression_threshold: 0.24
+      repost_tendency: 0.12
+    investor:
+      stubbornness: 0.35
+      activity_level: 0.7
+      susceptibility: 0.65
+      expression_threshold: 0.14
+      repost_tendency: 0.3
+
+initialization:
+  default_roster_mode: default
+  template_order:
+    accountant: [conservative, detail_focused, moderate, efficiency_focused, aggressive]
+    auditor: [strict, risk_auditor, pragmatic]
+    manager: [profit_focused, strategic, risk_averse]
+    regulator: [enforcer, guide, compliance_focused]
+    investor: [value_long_term, sentiment_trader, event_driven, policy_arb]
+  rosters:
+    small:
+      - { role: accountant, template_type: conservative }
+      - { role: accountant, template_type: detail_focused }
+      - { role: auditor, template_type: strict }
+      - { role: manager, template_type: strategic }
+      - { role: manager, template_type: profit_focused }
+      - { role: regulator, template_type: enforcer }
+      - { role: investor, template_type: value_long_term }
+      - { role: investor, template_type: sentiment_trader }
+    default:
+      - { role: accountant, template_type: conservative }
+      - { role: accountant, template_type: detail_focused }
+      - { role: auditor, template_type: strict }
+      - { role: auditor, template_type: risk_auditor }
+      - { role: manager, template_type: profit_focused }
+      - { role: manager, template_type: strategic }
+      - { role: regulator, template_type: enforcer }
+      - { role: regulator, template_type: guide }
+      - { role: investor, template_type: value_long_term }
+      - { role: investor, template_type: sentiment_trader }
+    extended:
+      - { role: accountant, template_type: conservative }
+      - { role: accountant, template_type: detail_focused }
+      - { role: accountant, template_type: efficiency_focused }
+      - { role: auditor, template_type: strict }
+      - { role: auditor, template_type: risk_auditor }
+      - { role: manager, template_type: profit_focused }
+      - { role: manager, template_type: strategic }
+      - { role: regulator, template_type: enforcer }
+      - { role: regulator, template_type: guide }
+      - { role: investor, template_type: value_long_term }
+      - { role: investor, template_type: sentiment_trader }
+      - { role: investor, template_type: event_driven }
+  role_base_bias:
+    accountant: -0.2
+    auditor: -0.26
+    manager: 0.04
+    regulator: 0.18
+    investor: 0.02
+  role_direction:
+    accountant: -0.2
+    auditor: -0.24
+    manager: 0.1
+    regulator: 0.2
+    investor: 0.04
+  template_bias:
+    accountant:
+      conservative: -0.22
+      detail_focused: -0.12
+      moderate: -0.02
+      efficiency_focused: 0.06
+      aggressive: 0.2
+    auditor:
+      strict: -0.24
+      risk_auditor: -0.12
+      pragmatic: -0.02
+    manager:
+      profit_focused: 0.2
+      strategic: 0.1
+      risk_averse: -0.12
+    regulator:
+      enforcer: 0.22
+      guide: 0.1
+      compliance_focused: 0.16
+    investor:
+      value_long_term: -0.06
+      sentiment_trader: 0.22
+      event_driven: 0.12
+      policy_arb: 0.06
+  relevance_weights:
+    direct_role_boost: 0.16
+    industry_match_boost: 0.12
+    specialization_match_boost: 0.1
+    enforcement_scale: 0.12
+    public_attention_scale: 0.08
+  prior_belief_weights:
+    relevance_scale: 0.3
+    noise_scale: 0.16
+    authority_bonus: 0.14
+    accountability_penalty: 0.22
+    exposure_penalty: 0.14
+    resource_penalty: 0.1
+    investor_risk_budget_bonus: 0.18
+    ambiguity_dampening: 0.18
+  tier_thresholds:
+    influence: { high: 0.72, medium: 0.5 }
+    activation: { lead: 0.74, observe: 0.38 }
+    cross_role: { high: 0.72, medium: 0.45 }
+  voice_styles:
+    accountant: 专业、审慎、条款导向
+    auditor: 怀疑、谨慎、程序化
+    manager: 务实、结果导向、兼顾沟通
+    regulator: 权威、克制、执行导向
+    investor: 直接、市场化、收益风险并重
+    detail_focused: 逐条核对、慢而准
+    strict: 先证据后结论
+    strategic: 长周期、看全局
+    sentiment_trader: 直接、交易化、看重预期差
+  scene_inference:
+    default_domain: general_compliance
+    domain_keywords:
+      general_compliance: [政策, 监管, 会计, 准则, 规范]
+      disclosure: [披露, 公告, 财报, 说明, 透明, 报表]
+      audit: [审计, 核查, 鉴证, 证据, 内控, 复核]
+      valuation: [估值, 融资, 投资者, 市值, 交易, 股价]
+      enforcement: [处罚, 执法, 问询, 检查, 整改, 查处]
+    domain_roles:
+      general_compliance: [accountant, manager, regulator]
+      disclosure: [accountant, manager, regulator, investor]
+      audit: [accountant, auditor, regulator]
+      valuation: [manager, investor, accountant]
+      enforcement: [regulator, auditor, manager, accountant]
+    domain_industries:
+      general_compliance: [全行业]
+      disclosure: [资本市场, 上市公司]
+      audit: [上市公司, 金融]
+      valuation: [资本市场, 科技, 消费]
+      enforcement: [资本市场, 金融, 制造业]
+    industry_keywords:
+      金融: [银行, 金融, 保险, 券商]
+      科技: [科技, 互联网, 平台, 软件]
+      制造业: [制造, 工业, 供应链, 工厂]
+      消费: [消费, 零售, 商超, 品牌]
+      能源: [能源, 电力, 煤炭, 石油, 新能源]
+      资本市场: [上市, 证券, 交易所, 资本市场, 投资者]
+  role_domain_affinity:
+    general_compliance:
+      accountant: 0.68
+      auditor: 0.56
+      manager: 0.62
+      regulator: 0.66
+      investor: 0.34
+    disclosure:
+      accountant: 0.78
+      auditor: 0.54
+      manager: 0.72
+      regulator: 0.68
+      investor: 0.6
+    audit:
+      accountant: 0.72
+      auditor: 0.86
+      manager: 0.46
+      regulator: 0.64
+      investor: 0.28
+    valuation:
+      accountant: 0.52
+      auditor: 0.42
+      manager: 0.72
+      regulator: 0.5
+      investor: 0.82
+    enforcement:
+      accountant: 0.7
+      auditor: 0.74
+      manager: 0.64
+      regulator: 0.88
+      investor: 0.36
+  investor_prototypes:
+    value_long_term:
+      name: 长期价值投资者
+      self_description: 重视现金流、治理质量和长期估值锚的机构投资者
+      strategy: 基本面
+      disposition_effect: 低
+      lottery_preference: 低
+      followed_industries: [消费, 金融, 制造业]
+      organization_type: 长线公募基金
+      specialization: 基本面研究
+      capital_type: institutional_long_only
+      holding_horizon: long
+      risk_budget: medium
+      information_sensitivity: high
+      network_influence: 0.64
+      reputation_score: 0.62
+    sentiment_trader:
+      name: 情绪交易型投资者
+      self_description: 重视主题热度、预期差和交易节奏的活跃资金
+      strategy: 技术面
+      disposition_effect: 高
+      lottery_preference: 高
+      followed_industries: [科技, 资本市场]
+      organization_type: 活跃私募交易台
+      specialization: 情绪与流动性交易
+      capital_type: fast_money
+      holding_horizon: short
+      risk_budget: high
+      information_sensitivity: high
+      network_influence: 0.58
+      reputation_score: 0.46
+    event_driven:
+      name: 事件驱动投资者
+      self_description: 关注政策边际变化、事件催化和估值重定价机会
+      strategy: 事件驱动
+      disposition_effect: 中等
+      lottery_preference: 中等
+      followed_industries: [资本市场, 制造业, 科技]
+      organization_type: 事件驱动对冲基金
+      specialization: 政策交易与事件分析
+      capital_type: event_fund
+      holding_horizon: medium
+      risk_budget: high
+      information_sensitivity: high
+      network_influence: 0.62
+      reputation_score: 0.55
+    policy_arb:
+      name: 政策套利型投资者
+      self_description: 擅长捕捉政策落地节奏和监管口径差异带来的交易机会
+      strategy: 政策套利
+      disposition_effect: 中等
+      lottery_preference: 中等
+      followed_industries: [金融, 资本市场, 能源]
+      organization_type: 政策主题专户
+      specialization: 政策解读与交易执行
+      capital_type: thematic_account
+      holding_horizon: medium
+      risk_budget: medium
+      information_sensitivity: high
+      network_influence: 0.56
+      reputation_score: 0.52
+
+social_network:
+  default_top_k: 5
+  exposure_limit: 5
+  confidence_threshold: 0.7
+  confidence_decay: 0.2
+  reinforce_delta: 0.05
+  weaken_delta: 0.05
+  min_edge_weight: 0.05
+  weight_config:
+    role_affinity: 0.35
+    profile_similarity: 0.2
+    concern_similarity: 0.15
+    belief_similarity: 0.15
+    authority: 0.15
+  role_affinity:
+    accountant:
+      accountant: 0.9
+      auditor: 0.85
+      manager: 0.65
+      regulator: 0.8
+      investor: 0.45
+    auditor:
+      accountant: 0.85
+      auditor: 0.9
+      manager: 0.6
+      regulator: 0.8
+      investor: 0.4
+    manager:
+      accountant: 0.75
+      auditor: 0.6
+      manager: 0.75
+      regulator: 0.55
+      investor: 0.8
+    regulator:
+      accountant: 0.8
+      auditor: 0.85
+      manager: 0.65
+      regulator: 0.7
+      investor: 0.75
+    investor:
+      accountant: 0.5
+      auditor: 0.45
+      manager: 0.75
+      regulator: 0.7
+      investor: 0.85
+  role_authority:
+    regulator: 1.0
+    auditor: 0.85
+    manager: 0.7
+    accountant: 0.65
+    investor: 0.55
