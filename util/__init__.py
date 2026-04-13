@@ -1,7 +1,7 @@
 """
-TwinMarket 工具模块
+RegPolicyLab 工具模块
 
-包含数据库管理、论坛互动、用户画像等工具类
+包含数据库管理、论坛互动、角色画像等工具类
 """
 
 from .RoleProfileDB import load_role_profile, init_role_profiles_db, ROLE_PROFILE_DB_PATH
